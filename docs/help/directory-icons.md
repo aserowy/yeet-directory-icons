@@ -11,14 +11,14 @@ y.plugin.register({ url = "https://github.com/aserowy/yeet-directory-icons" })
 require('yeet-directory-icons').setup()
 ```
 
-The plugin registers an `on_window_create` hook to set icon column width to `1` for directory windows, and an `on_bufferline_mutate` hook to assign icons and colors to each entry.
+The plugin registers an `on_window_create` hook to set `prefix_column_width = 2` for directory windows (Nerd Font icons use more than one cell), and an `on_bufferline_mutate` hook to assign icons and colors to each entry via `ctx.prefix`.
 
 ## How It Works
 
 During `setup()`, the plugin:
 
 1. Registers default values for all `DirectoryIconsColor*` theme tokens (only if not already set by a theme plugin).
-2. Registers an `on_window_create` hook that sets `icon_column_width = 1` for directory panes.
+2. Registers an `on_window_create` hook that sets `prefix_column_width = 2` for directory panes.
 3. Registers an `on_bufferline_mutate` hook that resolves icons and colors for directory entries.
 
 During bufferline mutation, the plugin:
@@ -28,7 +28,7 @@ During bufferline mutation, the plugin:
 3. Strips trailing slash and ANSI sequences to get a clean filename.
 4. Resolves icon glyph and color token by checking filename rules, extension rules, and directory name rules.
 5. Reads the color from `y.theme[token_name]`.
-6. Sets `ctx.icon` to the colored icon glyph and `ctx.content` to the colored entry text.
+6. Sets `ctx.prefix` to the colored icon glyph and `ctx.content` to the colored entry text.
 
 ## Theme Tokens
 
@@ -182,4 +182,4 @@ y.theme.DirectoryIconsColorDirGit = "#ff936a"
 
 ## Without This Plugin
 
-Without `yeet-directory-icons`, directory entries are plain unstyled text with no icons. The icon column width remains `0` (no space reserved).
+Without `yeet-directory-icons`, directory entries are plain unstyled text with no icons. The prefix column width remains `0` (no space reserved).

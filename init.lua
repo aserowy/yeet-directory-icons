@@ -389,9 +389,9 @@ function M.setup()
 
     y.hook.on_window_create:add(function(ctx)
         if ctx.type == "directory" then
-            ctx.parent.icon_column_width = 1
-            ctx.current.icon_column_width = 1
-            ctx.preview.icon_column_width = 1
+            ctx.parent.prefix_column_width = 2
+            ctx.current.prefix_column_width = 2
+            ctx.preview.prefix_column_width = 2
         end
     end)
 
@@ -415,7 +415,7 @@ function M.setup()
         local color = y.theme[token] or token_defaults[token] or "#6d8086"
         local ansi_color = get_ansi(color)
 
-        ctx.icon = ansi_color .. icon .. ANSI_RESET
+        ctx.prefix = ansi_color .. icon .. ANSI_RESET
         ctx.content = ansi_color .. content .. ANSI_RESET
     end)
 end
