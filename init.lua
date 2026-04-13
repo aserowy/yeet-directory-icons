@@ -391,7 +391,14 @@ function M.setup()
         if ctx.type == "directory" then
             ctx.parent.prefix_column_width = 2
             ctx.current.prefix_column_width = 2
+        end
+    end)
+
+    y.hook.on_window_change:add(function(ctx)
+        if ctx.preview_is_directory then
             ctx.preview.prefix_column_width = 2
+        else
+            ctx.preview.prefix_column_width = 0
         end
     end)
 
