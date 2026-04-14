@@ -395,7 +395,7 @@ function M.setup()
     end)
 
     y.hook.on_window_change:add(function(ctx)
-        if ctx.preview_is_directory then
+        if ctx.preview.buffer_type == "directory" then
             ctx.preview.prefix_column_width = 2
         else
             ctx.preview.prefix_column_width = 0
